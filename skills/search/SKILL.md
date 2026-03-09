@@ -1,26 +1,42 @@
 ---
-description: Search GitChain for products, knowledge, or saved contexts
+description: Search GitChain and present structured results with key specs and prices
 ---
 
 # GitChain Search
 
-Search the GitChain container registry for products, knowledge, or saved conversation contexts.
+Search the GitChain container registry and present rich, actionable results.
 
-## What to do
+## Process
 
-1. Use the `search` MCP tool with the user's query: `$ARGUMENTS`
-2. If the user mentions a specific manufacturer (Bosch, Eaton, Lightnet), set `namespace` accordingly
-3. Show results as a clean list with: **Name**, namespace, type, and container ID
-4. If results look relevant, ask if the user wants to drill into a specific product
+1. Use `search` MCP tool with user's query from `$ARGUMENTS`
+2. If manufacturer mentioned (Bosch, Eaton, Lightnet) → set `namespace`
+3. For each result in top 5-10: load key data with `get` using `path` parameter
+4. Present as structured table
 
-## Available namespaces
-- `bosch` — 22,435 heating/HVAC products (heat pumps, controllers, accessories)
-- `lightnet` — 109,117 lighting products (LED luminaires, controls, accessories)
-- `eaton` — Electrical components (UPS, circuit protection, switchgear)
+## Output Format
 
-## Example queries
-- "Bosch heat pump CS7001i" → `search({ query: "CS7001i", namespace: "bosch" })`
-- "LED pendant 3000K" → `search({ query: "LED pendant 3000K", namespace: "lightnet" })`
-- "UPS 750VA" → `search({ query: "UPS 750VA", namespace: "eaton" })`
+```
+# Suchergebnisse: "[Query]"
+**[X] Treffer in [Namespace] | GitChain Registry**
 
-Keep output concise. Show max 10 results. Always include the container ID so the user can drill in.
+| # | Produkt | Art.-Nr. | Serie | Preis (netto) | Kernmerkmal | Container ID |
+|---|---------|----------|-------|---------------|-------------|--------------|
+| 1 | [Name] | [Nr] | [Serie] | [€] | [wichtigstes Spec] | `0711:...:v1` |
+| 2 | ... | | | | | |
+
+### Schnellübersicht
+- **Preisrange:** [min] — [max] €
+- **Serien:** [Liste der gefundenen Serien]
+- **Verfügbare Daten:** Specs ✅ | Preise ✅ | Medien ✅/❌ | ETIM ✅
+
+💡 *Für Detailbericht: `/gitchain:product [Art.-Nr.]`*
+💡 *Für Vergleich: `/gitchain:compare [Nr. A] vs [Nr. B]`*
+```
+
+## Rules
+- Load at least key specs + price for each result (use `get` with `path`)
+- Always show prices when available
+- Always include container ID for drill-down
+- Suggest next actions (product detail, comparison)
+- Language: DEUTSCH
+- Max 10 results

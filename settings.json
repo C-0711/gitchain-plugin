@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "mcp": {
+      "gitchain": {
+        "autoApprove": ["search", "get", "status"]
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "gitchain",
+  "description": "Product data chain — search, browse, and manage 131K+ verified product containers across Bosch, Lightnet, Eaton and more. Blockchain-anchored provenance.",
+  "version": "2.0.0",
+  "author": {
+    "name": "0711 Intelligence",
+    "email": "c@0711.io"
+  },
+  "homepage": "https://gitchain.0711.io",
+  "repository": "https://github.com/C-0711/gitchain-plugin",
+  "license": "Apache-2.0",
+  "tags": ["product-data", "b2b", "etim", "bmecat", "supply-chain", "mcp"]
+}

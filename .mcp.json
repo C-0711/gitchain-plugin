@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "gitchain": {
+      "command": "ssh",
+      "args": [
+        "christoph.bertsch@192.168.145.10",
+        "cd ~/0711/0711-gitchain && GITCHAIN_API_URL=http://localhost:3100 node packages/mcp-server/dist/cli.js"
+      ]
+    }
+  }
+}
